@@ -5,7 +5,7 @@ import { injected } from 'wagmi/connectors';
 export const config = createConfig({
   chains: [arcTestnet],
   connectors: [
-    injected({ target: 'metaMask' }),
+    injected(),
   ],
   transports: {
     [arcTestnet.id]: http(),
