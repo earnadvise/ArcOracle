@@ -141,172 +141,92 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* User Connector Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          {/* Dual Mode Switcher */}
-          <div 
-            style={{ 
-              display: 'flex', 
-              background: 'rgba(0,0,0,0.3)', 
-              borderRadius: 'var(--radius-full)', 
-              padding: '2px', 
-              border: '1px solid var(--border-color)' 
-            }}
-          >
-            <button
-              onClick={() => setIsDemoMode(true)}
-              style={{
-                background: isDemoMode ? 'var(--color-accent)' : 'transparent',
-                color: isDemoMode ? 'var(--bg-dark)' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '4px 12px',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '11px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all var(--transition-fast)'
-              }}
-            >
-              Demo Mode
-            </button>
-            <button
-              onClick={() => setIsDemoMode(false)}
-              style={{
-                background: !isDemoMode ? 'var(--color-accent)' : 'transparent',
-                color: !isDemoMode ? 'var(--bg-dark)' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '4px 12px',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '11px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all var(--transition-fast)'
-              }}
-            >
-              Web3 Connection
-            </button>
-          </div>
-
-          {/* Wallet Balance & Connect Button */}
-          {isDemoMode ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div 
-                style={{ 
-                  background: 'rgba(16, 185, 129, 0.08)', 
-                  border: '1px solid rgba(16, 185, 129, 0.2)', 
-                  padding: '8px 14px', 
-                  borderRadius: 'var(--radius-md)', 
-                  fontSize: '13px', 
-                  color: 'var(--color-yes)',
-                  fontWeight: 700,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}
-              >
-                <Wallet size={14} />
-                <span>${usdcBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDC</span>
-              </div>
-              <div 
-                style={{ 
-                  background: 'rgba(255, 159, 28, 0.08)', 
-                  border: '1px solid rgba(255, 159, 28, 0.2)', 
-                  padding: '8px 14px', 
-                  borderRadius: 'var(--radius-md)', 
-                  fontSize: '13px', 
-                  color: 'var(--color-accent)',
-                  fontWeight: 700
-                }}
-              >
-                Demo Wallet Active
-              </div>
-            </div>
-          ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              {isConnected && address ? (
-                <>
-                  <div 
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {isConnected && address ? (
+              <>
+                <div 
+                  style={{ 
+                    background: 'rgba(16, 185, 129, 0.08)', 
+                    border: '1px solid rgba(16, 185, 129, 0.2)', 
+                    padding: '8px 14px', 
+                    borderRadius: 'var(--radius-md)', 
+                    fontSize: '13px', 
+                    color: 'var(--color-yes)',
+                    fontWeight: 700,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <Wallet size={14} />
+                  <span>${usdcBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDC</span>
+                </div>
+                
+                <div 
+                  className="btn btn-secondary" 
+                  style={{ 
+                    padding: '8px 14px', 
+                    fontSize: '13px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '8px' 
+                  }}
+                >
+                  <span 
+                    onClick={copyAddress} 
+                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                    title="Copy Address"
+                  >
+                    {copied ? <Check size={13} style={{ color: 'var(--color-yes)' }} /> : <Copy size={13} />}
+                    {truncatedAddress}
+                  </span>
+                  <button 
+                    onClick={disconnectWallet}
                     style={{ 
-                      background: 'rgba(16, 185, 129, 0.08)', 
-                      border: '1px solid rgba(16, 185, 129, 0.2)', 
-                      padding: '8px 14px', 
-                      borderRadius: 'var(--radius-md)', 
-                      fontSize: '13px', 
-                      color: 'var(--color-yes)',
-                      fontWeight: 700,
+                      background: 'transparent', 
+                      border: 'none', 
+                      cursor: 'pointer', 
+                      color: 'var(--color-no)', 
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '6px'
+                      marginLeft: '4px'
                     }}
-                  >
-                    <Wallet size={14} />
-                    <span>${usdcBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDC</span>
-                  </div>
-                  
-                  <div 
-                    className="btn btn-secondary" 
-                    style={{ 
-                      padding: '8px 14px', 
-                      fontSize: '13px', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      gap: '8px' 
-                    }}
-                  >
-                    <span 
-                      onClick={copyAddress} 
-                      style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
-                      title="Copy Address"
-                    >
-                      {copied ? <Check size={13} style={{ color: 'var(--color-yes)' }} /> : <Copy size={13} />}
-                      {truncatedAddress}
-                    </span>
-                    <button 
-                      onClick={disconnectWallet}
-                      style={{ 
-                        background: 'transparent', 
-                        border: 'none', 
-                        cursor: 'pointer', 
-                        color: 'var(--color-no)', 
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginLeft: '4px'
-                      }}
-                      title="Disconnect Wallet"
-                    >
-                      <Power size={13} />
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <button 
-                    className="btn btn-primary" 
-                    onClick={() => connectWallet(connectors.find(c => c.id === 'injected') || connectors[0])}
-                    style={{ padding: '8px 14px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}
-                  >
-                    <Wallet size={13} />
-                    MetaMask
-                  </button>
-                  <button 
-                    className="btn btn-secondary" 
-                    onClick={() => connectWallet(connectors.find(c => c.id === 'walletConnect') || connectors[1] || connectors[0])}
-                    style={{ 
-                      padding: '8px 14px', 
-                      fontSize: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      background: 'rgba(255, 159, 28, 0.1)',
-                      borderColor: 'rgba(255, 159, 28, 0.3)',
-                      color: 'var(--color-accent)'
-                    }}
+                    title="Disconnect Wallet"
                   >
                     <Power size={13} />
-                    WalletConnect
                   </button>
                 </div>
-              )}
-            </div>
-          )}
+              </>
+            ) : (
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button 
+                  className="btn btn-primary" 
+                  onClick={() => connectWallet(connectors.find(c => c.id === 'injected') || connectors[0])}
+                  style={{ padding: '8px 14px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}
+                >
+                  <Wallet size={13} />
+                  MetaMask
+                </button>
+                <button 
+                  className="btn btn-secondary" 
+                  onClick={() => connectWallet(connectors.find(c => c.id === 'walletConnect') || connectors[1] || connectors[0])}
+                  style={{ 
+                    padding: '8px 14px', 
+                    fontSize: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    background: 'rgba(255, 159, 28, 0.1)',
+                    borderColor: 'rgba(255, 159, 28, 0.3)',
+                    color: 'var(--color-accent)'
+                  }}
+                >
+                  <Power size={13} />
+                  WalletConnect
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
