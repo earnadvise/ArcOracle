@@ -280,7 +280,7 @@ export default function App() {
 
   // Trigger web3 wallet connection prompt
   const handleConnectWallet = (connector: any) => {
-    const targetConnector = connector || connectors.find(c => c.id === 'metaMask' || c.id === 'injected') || connectors[0];
+    const targetConnector = connector || connectors.find(c => c.id === 'injected') || connectors[0];
     
     if (targetConnector) {
       addToast('Connecting Wallet', `Requesting connection to ${targetConnector.name}...`, 'info');
