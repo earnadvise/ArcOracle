@@ -205,24 +205,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   style={{ padding: '8px 14px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}
                 >
                   <Wallet size={13} />
-                  MetaMask
-                </button>
-                <button 
-                  className="btn btn-secondary" 
-                  onClick={() => connectWallet(connectors.find(c => c.id === 'walletConnect') || connectors[1] || connectors[0])}
-                  style={{ 
-                    padding: '8px 14px', 
-                    fontSize: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    background: 'rgba(255, 159, 28, 0.1)',
-                    borderColor: 'rgba(255, 159, 28, 0.3)',
-                    color: 'var(--color-accent)'
-                  }}
-                >
-                  <Power size={13} />
-                  WalletConnect
+                  EVM Connect
                 </button>
               </div>
             )}
