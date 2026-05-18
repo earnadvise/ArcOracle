@@ -281,12 +281,12 @@ export default function App() {
   // Trigger web3 wallet connection prompt
   const handleConnectWallet = (connector: any) => {
     if (connector) {
-      connect({ connector });
+      connect({ connector, chainId: arcTestnet.id });
       addToast('Connecting Wallet', `Connecting to ${connector.name}...`, 'info');
     } else {
       const injected = connectors.find(c => c.id === 'injected') || connectors[0];
       if (injected) {
-        connect({ connector: injected });
+        connect({ connector: injected, chainId: arcTestnet.id });
         addToast('Connecting Wallet', 'Connecting your Ethereum provider to Arc Testnet...', 'info');
       } else {
         addToast('No Wallet Found', 'No Web3 browser extension detected. Please download MetaMask or try Demo Mode!', 'error');
