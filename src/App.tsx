@@ -40,7 +40,7 @@ export default function App() {
   // Navigation & State Mode
   const [activeTab, setActiveTab] = useState<'MARKETS' | 'PORTFOLIO' | 'CREATE' | 'FAUCET'>('MARKETS');
   const [selectedMarket, setSelectedMarket] = useState<PredictionMarket | null>(null);
-  const [isDemoMode, setIsDemoMode] = useState<boolean>(true);
+  const [isDemoMode, setIsDemoMode] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<MarketCategory>('ALL');
   const [selectedOutcome, setSelectedOutcome] = useState<'YES' | 'NO'>('YES');
 
