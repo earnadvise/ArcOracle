@@ -201,7 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button 
                   className="btn btn-primary" 
-                  onClick={() => connectWallet(connectors.find(c => c.id === 'injected') || connectors[0])}
+                  onClick={() => connectWallet(connectors.find(c => c.id === 'metaMask' || c.id === 'injected') || connectors[0])}
                   style={{ padding: '8px 14px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}
                 >
                   <Wallet size={13} />
